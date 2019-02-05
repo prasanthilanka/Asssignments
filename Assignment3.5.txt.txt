@@ -1,0 +1,30 @@
+1. Import the Titanic Dataset from the link Titanic Data Set.
+Perform the following:
+a. Is there any difference in fares by different class of tickets?
+Note - Show a boxplot displaying the distribution of fares by class
+
+Answer: Yes, as box plot shows class 1 having higher fare than class 2 and 3, and class 2 is having higher fare than class 1
+
+pclass <- titanic_data$pclass
+fare <- titanic_data$fare
+
+ggplot(titanic_data,aes(pclass, fare))+
+  geom_boxplot(width=0.5,fill="firebrick",colour="cadetblue2",outlier.color = "purple",outlier.shape = 2)+
+  ggtitle("Distribution of fares by class")
+
+b. Is there any association with Passenger class and gender?
+Note – Show a stacked bar chart
+
+Answer: 
+
+There is a clear interaction effect between Passenger Class and Sex. First and second class female passengers had a higher mean number of survivors than the third class female passengers. 
+First class male passengers had a higher mean number of survivors than the second and third class male passengers.
+
+pclass <- titanic_data$pclass
+sex <- titanic_data$sex
+
+ggplot(titanic_data,aes(pclass,fill=sex))+
+  geom_bar()+
+  xlab("Passenger class")+
+  ylab("Count of survivor")+
+  ggtitle("Association with passenger class and sex")

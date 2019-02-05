@@ -1,0 +1,101 @@
+a. Preprocess the passenger names to come up with a list of titles that represent families and represent using appropriate visualization graph.
+
+Answer:
+
+library(readxl)
+library(dplyr)
+library(ggplot2)
+
+# Reading excel file from the specified path
+titanic_data = read_xls("C:/Users/Documents/titanic.xls", sheet = 1)
+
+# str(titanic_data)
+# summary(titanic_data)
+# head(titanic_data$name)
+
+# Extracting title name using gsub
+
+titanic_data$Title <- gsub('(.*,)|(\\..*)','',titanic_data$name)
+unique(titanic_data$Title)
+
+
+# Removing typing mistakes in title
+titanic_data$Title[titanic_data$Title==' Mlle']<-' Miss'
+titanic_data$Title[titanic_data$Title==' Ms']<-' Miss'
+titanic_data$Title[titanic_data$Title==' Mme']<-' Mrs'
+
+
+# Combine all the rare title
+rare_titles<-c(" Capt"," Col"," Don"," Dr"," Rev", " Jonkheer"," Lady"," Major"," the Countess"," Sir","")
+titanic_data$Title[titanic_data$Title %in% rare_titles] <- " Rare title"
+
+# Plot usign ggplot the relationship between Title & survival
+ggplot(titanic_data, aes(x=factor(Title), fill=factor(survived)))+
+  geom_bar()+
+  xlab("Title")+
+  scale_fill_discrete(name = "Survived") + 
+  ggtitle("Title vs Survived")
+
+
+
+b. Represent the proportion of people survived from the family size using a graph.
+
+Answer:
+
+library(readxl)
+library(dplyr)
+library(ggplot2)
+
+# Reading excel file from the specified path
+titanic_data = read_xls("C:/Users/Documents/titanic.xls", sheet = 1)
+
+# str(titanic_data)
+# summary(titanic_data)
+# head(titanic_data$name)
+
+# calculate family size
+titanic_data$Familysize<-as.numeric(titanic_data$sibsp)+as.numeric(titanic_data$parch)+1
+
+# Visualize the relationship between Familysize & survival
+ggplot(titanic_data, aes(x = Familysize, fill = factor(survived))) +
+  geom_bar(stat='count', position='dodge') +
+  scale_x_continuous(breaks=c(1:12)) +
+  labs(x = 'Family Size') 
+
+
+
+c. Impute the missing values in Age variable using Mice Library, create two different graphs showing Age distribution before and after imputation.
+
+Answer:
+
+library(readxl)
+library(dplyr)
+library(naniar)
+library(ggplot2)
+library(mice)
+library(randomForest)
+
+titanic_data = read_xls("C:/Users/Documents/titanic.xls", sheet = 1)
+# str(titanic_data)
+# summary(titanic_data)
+# head(titanic_data$name)
+
+#count number of missing value in age
+sum(is.na(as.numeric(titanic_data$age)))
+
+titanic_data$pclass<-factor(titanic_data$pclass)
+
+# Mice imputation
+set.seed(128)
+mice_model<-mice(titanic_data[,names(titanic_data) %in% c('pclass','age')],method='rf')
+
+# count number after imputing
+sum(is.na(as.numeric(titanic_data$age)))
+
+mice_output<-complete(mice_model)
+
+# Plotting Original vs Mice, As distribution pattern remains identical before and post imputation, showing quality of imputation is good
+par(mfrow=c(1,2))
+hist(as.numeric(titanic_data$age), freq=F,main="Original data : Age", col="dark blue", ylim=c(0,0.04))
+hist(as.numeric(mice_output$age), freq=F,main="MICE output : Age", col="blue", ylim=c(0,0.04))
+
