@@ -28,9 +28,10 @@ setdiff(vec1,vec2)
 vec1 = c(rownames(mtcars[1:15,]))
 vec2 = c(rownames(mtcars[11:25,]))
 
-identical(vec1, vec2, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE,
-          ignore.bytecode = TRUE, ignore.environment = FALSE,
-          ignore.srcref = TRUE)
+setequal(vec1, vec2)    # is vec1 equal to vec 2
+setequal( union(vec1, vec2),
+          c(setdiff(vec1, vec2), intersect(vec1, vec2), setdiff(vec1, vec2)))
+
 
 
 
