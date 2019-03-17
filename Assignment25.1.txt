@@ -1,18 +1,42 @@
+SAKILA DATABASE
+I followed the below steps
+1.	Set up the Sakila Databse from the link provided.
+2.	Studied the ERR diagram to understand the database and inter relations. The database consists of three parts:
+a.	Inventory (Movie Database)			: includes eight tables
+b.	Customer Data (Customer Related Data)		: includes four tables
+c.	Business (Data required to run the business)	: includes four tables
+The interrelation and dependencies were identified
+3.	Connected to the DBMS after opening the ‘Sakila-schema’
+4.	Connected to the DBMS after opening the ‘Sakila-data’
+5.	Using Sakila-data
+a.	USE Sakila
+b.	Created tables 
+i.	Actor
+ii.	Film_Text
+iii.	Language
+iv.	Film_category
+c.	Created tables in the sequence
+i.	Country
+ii.	City
+iii.	Address
+d.	Created Staff table (after removing  CONSTRAINT fk_staff_store FOREIGN KEY (store_id) REFERENCES store (store_id) ON DELETE RESTRICT ON UPDATE CASCADE,)
+e.	Created store table
 
+6.	Using Sakila-schema 
+a.	Inserted values in the table ‘store’
 
-#Problem
-#Problem Statement
-#Set up/Install the database sakila. The database will be used for next MySQL Assignments as
-#well. Refer the Links given above for help in setting up the database.
+7.	Using Sakila-data
+a.	Altered the Staff table
+alter table staff add CONSTRAINT fk_staff_store FOREIGN KEY (store_id) REFERENCES store (store_id) ON DELETE RESTRICT ON UPDATE CASCADE;
 
-#Answers
-I have gone through all the links.
-Downloaded the sakila database on my laptop and moreover there is nothing to write about how I download the database because it�s a basic thing to do.
-After downloading I used below command lines to install it.
-
-mysql> SOURCE C:/Users/prasanthi/Downloads/Compressed/sakila-db/sakila-schema.sql;
-
-and 
-
-mysql> SOURCE C:/Users/prasanthi/Downloads/Compressed/sakila-db/sakila-data.sql;
+b.	Created tables in the sequence
+i.	Film
+ii.	Customer
+iii.	Inventory
+iv.	Rental
+v.	Payment
+c.	Created tables
+i.	Film_actor
+ii.	Category
+8.	Using ‘Sakila-schema’ Inserted values in the tables
 
