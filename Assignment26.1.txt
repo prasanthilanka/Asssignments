@@ -1,0 +1,184 @@
+
+#Problem
+#Problem Statement
+#1. What are the names of all the countries in the databases which start with the letter "B"
+#(sorted by their names)?
+#2. Return the first names (sorted) of all the actors with the last name "berry".
+#3. Find all the films whose length is more than 184 (inclusive). Order the results by the length
+#(and for films with the same length order them by their name). Return their title and the length.
+
+#Answers
+#1
+#to get the names of all the country
+
+SELECT country FROM sakila.country;
++---------------------------------------+
+| country                               |
++---------------------------------------+
+| Afghanistan                           |
+| Algeria                               |
+| American Samoa                        |
+| Angola                                |
+| Anguilla                              |
+| Argentina                             |
+| Armenia                               |
+| Australia                             |
+| Austria                               |
+| Azerbaijan                            |
+| Bahrain                               |
+| Bangladesh                            |
+| Belarus                               |
+| Bolivia                               |
+| Brazil                                |
+| Brunei                                |
+| Bulgaria                              |
+| Cambodia                              |
+| Cameroon                              |
+| Canada                                |
+| Chad                                  |
+| Chile                                 |
+| China                                 |
+| Colombia                              |
+| Congo, The Democratic Republic of the |
+| Czech Republic                        |
+| Dominican Republic                    |
+| Ecuador                               |
+| Egypt                                 |
+| Estonia                               |
+| Ethiopia                              |
+| Faroe Islands                         |
+| Finland                               |
+| France                                |
+| French Guiana                         |
+| French Polynesia                      |
+| Gambia                                |
+| Germany                               |
+| Greece                                |
+| Greenland                             |
+| Holy See (Vatican City State)         |
+| Hong Kong                             |
+| Hungary                               |
+| India                                 |
+| Indonesia                             |
+| Iran                                  |
+| Iraq                                  |
+| Israel                                |
+| Italy                                 |
+| Japan                                 |
+| Kazakstan                             |
+| Kenya                                 |
+| Kuwait                                |
+| Latvia                                |
+| Liechtenstein                         |
+| Lithuania                             |
+| Madagascar                            |
+| Malawi                                |
+| Malaysia                              |
+| Mexico                                |
+| Moldova                               |
+| Morocco                               |
+| Mozambique                            |
+| Myanmar                               |
+| Nauru                                 |
+| Nepal                                 |
+| Netherlands                           |
+| New Zealand                           |
+| Nigeria                               |
+| North Korea                           |
+| Oman                                  |
+| Pakistan                              |
+| Paraguay                              |
+| Peru                                  |
+| Philippines                           |
+| Poland                                |
+| Puerto Rico                           |
+| Romania                               |
+| Runion                                |
+| Russian Federation                    |
+| Saint Vincent and the Grenadines      |
+| Saudi Arabia                          |
+| Senegal                               |
+| Slovakia                              |
+| South Africa                          |
+| South Korea                           |
+| Spain                                 |
+| Sri Lanka                             |
+| Sudan                                 |
+| Sweden                                |
+| Switzerland                           |
+| Taiwan                                |
+| Tanzania                              |
+| Thailand                              |
+| Tonga                                 |
+| Tunisia                               |
+| Turkey                                |
+| Turkmenistan                          |
+| Tuvalu                                |
+| Ukraine                               |
+| United Arab Emirates                  |
+| United Kingdom                        |
+| United States                         |
+| Venezuela                             |
+| Vietnam                               |
+| Virgin Islands, U.S.                  |
+| Yemen                                 |
+| Yugoslavia                            |
+| Zambia                                |
++---------------------------------------+
+
+
+#to get the names of countries starting with B,we are using country table of sakila database here
+
+MySQL> SELECT country FROM sakila.country WHERE country LIKE 'B%';
++------------+
+| country    |
++------------+
+| Bahrain    |
+| Bangladesh |
+| Belarus    |
+| Bolivia    |
+| Brazil     |
+| Brunei     |
+| Bulgaria   |
++------------+
+
+
+#2
+#to get first names of actors having last name berry.we are using actor table of sakila database here
+
+MySQL> SELECT first_name FROM sakila.actor WHERE last_name ='berry';
++-------------+
+| first_name  |
++-------------+
+| KARL        |
+| HENRY       |
+| CHRISTOPHER |
++-------------+
+
+#3
+#to get all the films whose length is more than 184 (inclusive) and Order the results by the length
+And Return their title and the length.we are using film table from sakila database here
+
+MySQL> SELECT title,length FROM sakila.film WHERE length >=184 ORDER BY length;
++--------------------+--------+
+| title              | length |
++--------------------+--------+
+| CONSPIRACY SPIRIT  |    184 |
+| CRYSTAL BREAKING   |    184 |
+| KING EVOLUTION     |    184 |
+| MOONWALKER FOOL    |    184 |
+| SMOOCHY CONTROL    |    184 |
+| SONS INTERVIEW     |    184 |
+| SORORITY QUEEN     |    184 |
+| THEORY MERMAID     |    184 |
+| CHICAGO NORTH      |    185 |
+| CONTROL ANTHEM     |    185 |
+| DARN FORRESTER     |    185 |
+| GANGS PRIDE        |    185 |
+| HOME PITY          |    185 |
+| MUSCLE BRIGHT      |    185 |
+| POND SEATTLE       |    185 |
+| SOLDIERS EVOLUTION |    185 |
+| SWEET BROTHERHOOD  |    185 |
+| WORST BANGER       |    185 |
++--------------------+--------+

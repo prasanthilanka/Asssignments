@@ -1,0 +1,96 @@
+
+#Problem
+#Problem Statement
+#4. Return the first name, last name and city of all customers who live in Canada. Order the re-
+# sults first by the last then by the first name.
+#5. How many customers are from Brazil??
+#6. Return the "popular countries"? (that is, the ones with more than 20 customer). For each
+#such country, return its name and its correspond number of customers. Order the result by the
+#number of customers (descending).
+
+#Answers
+#4 To get names of city which are in country canada
+mysql> SELECT city FROM sakila.city WHERE country_id = ANY (SELECT country_id FROM sakila.country WHERE country LIKE 'Canada%');
++---------------+
+| city          |
++---------------+
+| Gatineau      |
+| Halifax       |
+| Lethbridge    |
+| London        |
+| Oshawa        |
+| Richmond Hill |
+| Vancouver     |
++---------------+
+
+
+
+
+****To get first name and last name of customers which are from country Canada
+
+mysql> SELECT last_name,first_name FROM sakila.customer WHERE address_id = ANY (SELECT city_id FROM sakila.city WHERE country_id = ANY (SELECT country_id FROM sakila.country WHERE country LIKE 'Canada%')) ORDER BY last_name,first_name;
++-----------+------------+
+| last_name | first_name |
++-----------+------------+
+| BANDA     | EVERETT    |
+| BATES     | DAISY      |
+| CULPEPPER | EUGENE     |
+| GRIGSBY   | THOMAS     |
+| LAWRENCE  | LAURIE     |
+| OLSON     | ANNETTE    |
+| SIKES     | FRANCIS    |
++-----------+------------+
+
+#5 To get customer first name and last name which are from country brazil
+mysql> SELECT first_name,last_name FROM sakila.customer WHERE address_id = ANY (SELECT city_id FROM sakila.city WHERE country_id = ANY (SELECT country_id FROM sakila.country WHERE country LIKE 'Brazil%'));
++------------+------------+
+| first_name | last_name  |
++------------+------------+
+| DONNA      | THOMPSON   |
+| MICHELLE   | CLARK      |
+| LAURA      | RODRIGUEZ  |
+| KIMBERLY   | LEE        |
+| JESSICA    | HALL       |
+| AMANDA     | CARTER     |
+| JOAN       | COOPER     |
+| RACHEL     | BARNES     |
+| MARILYN    | ROSS       |
+| ANNE       | POWELL     |
+| DANA       | HART       |
+| ROBERTA    | HARPER     |
+| HOLLY      | FOX        |
+| STACEY     | MONTGOMERY |
+| LYDIA      | BURKE      |
+| VIOLA      | HANSON     |
+| MARK       | RINEHART   |
+| MATTHEW    | MAHAN      |
+| LEONARD    | SCHOFIELD  |
+| MANUEL     | MURRELL    |
+| BRADLEY    | MOTLEY     |
+| JIM        | REA        |
+| RONNIE     | RICKETTS   |
+| COREY      | HAUSER     |
+| HERMAN     | DEVORE     |
+| CLYDE      | TOBIAS     |
+| KEN        | PREWITT    |
+| CASEY      | MENA       |
++------------+------------+
+
+
+
+
+
+#6
+As I don’t find the correlation I am doing this way with no of customer id more than 10
+To get the count of relevant customers and its country name
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 10
+ORDER BY COUNT(CustomerID) DESC;
+| Customer_id | Country |
+17                     Usa
+14                     France
+14                     Brazil
+
+
