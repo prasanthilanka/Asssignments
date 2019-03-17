@@ -1,0 +1,18 @@
+
+
+#Problem
+#Problem Statement
+#Set up/Install the database sakila. The database will be used for next MySQL Assignments as
+#well. Refer the Links given above for help in setting up the database.
+
+#Answers
+I have gone through all the links.
+Downloaded the sakila database on my laptop and moreover there is nothing to write about how I download the database because it’s a basic thing to do.
+After downloading I used below command lines to install it.
+
+mysql> SOURCE C:/Users/prasanthi/Downloads/Compressed/sakila-db/sakila-schema.sql;
+
+and 
+
+mysql> SOURCE C:/Users/prasanthi/Downloads/Compressed/sakila-db/sakila-data.sql;
+
